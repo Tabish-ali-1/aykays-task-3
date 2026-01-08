@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-step Signup Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Create Your Account</h1>
+            <p class="subtitle">Complete your profile in a few simple steps</p>
+        </header>
+
+        <!-- Progress Indicator -->
+        <nav aria-label="Signup progress" class="progress-indicator">
+            <ol class="progress-steps">
+                <li class="progress-step" data-step="1">
+                    <span class="step-number" aria-current="step">1</span>
+                    <span class="step-label">Account</span>
+                </li>
+                <li class="progress-step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Profile</span>
+                </li>
+                <li class="progress-step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Confirm</span>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Main Form -->
+        <form id="signupForm" role="form" aria-labelledby="form-title" novalidate>
+            <h2 id="form-title" class="sr-only">Multi-step signup form</h2>
+
+            <!-- Step 1: Account Information -->
+            <section 
+                id="step1" 
+                class="form-step active" 
+                role="tabpanel"
+                aria-labelledby="step1-title"
+                aria-hidden="false"
+            >
+                <h3 id="step1-title">Account Information</h3>
+                
+                <div class="form-group">
+                    <label for="email" class="required">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        aria-required="true"
+                        aria-describedby="email-error"
+                        autocomplete="email"
+                    >
+                    <span id="email-error" class="error-message" role="alert" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="required">Password</label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required 
+                            aria-required="true"
+                            aria-describedby="password-error password-requirements"
+                            autocomplete="new-password"
+                        >
+                        <button 
+                            type="button" 
+                            id="togglePassword" 
+                            class="password-toggle"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            <span class="toggle-icon" aria-hidden="true">👁️</span>
+                        </button>
+                    </div>
+                    <span id="password-requirements" class="help-text">
+                        Password must be at least 8 characters with uppercase, lowercase, and a number
+                    </span>
+                    <span id="password-error" class="error-message" role="alert" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="required">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        required 
+                        aria-required="true"
+                        aria-describedby="confirmPassword-error"
+                        autocomplete="new-password"
+                    >
+                    <span id="confirmPassword-error" class="error-message" role="alert" aria-live="polite"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="nextToStep2" class="btn btn-primary">
+                        Next: Profile
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 2: Profile Information -->
+            <section 
+                id="step2" 
+                class="form-step" 
+                role="tabpanel"
+                aria-labelledby="step2-title"
+                aria-hidden="true"
+            >
+                <h3 id="step2-title">Profile Information</h3>
+                
+                <div class="form-group">
+                    <label for="firstName" class="required">First Name</label>
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        name="firstName" 
+                        required 
+                        aria-required="true"
+                        aria-describedby="firstName-error"
+                        autocomplete="given-name"
+                    >
+                    <span id="firstName-error" class="error-message" role="alert" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="required">Last Name</label>
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        name="lastName" 
+                        required 
+                        aria-required="true"
+                        aria-describedby="lastName-error"
+                        autocomplete="family-name"
+                    >
+                    <span id="lastName-error" class="error-message" role="alert" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="avatar">Profile Picture (Optional)</label>
+                    <div class="file-upload-wrapper">
+                        <input 
+                            type="file" 
+                            id="avatar" 
+                            name="avatar" 
+                            accept="image/*"
+                            aria-describedby="avatar-error avatar-preview"
+                        >
+                        <label for="avatar" class="file-upload-label">
+                            <span class="file-upload-text">Choose File</span>
+                            <span class="file-upload-button">Browse</span>
+                        </label>
+                    </div>
+                    <div id="avatar-preview" class="avatar-preview" aria-live="polite"></div>
+                    <span id="avatar-error" class="error-message" role="alert" aria-live="polite"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="backToStep1" class="btn btn-secondary">
+                        <span aria-hidden="true">←</span>
+                        Back
+                    </button>
+                    <button type="button" id="nextToStep3" class="btn btn-primary">
+                        Next: Review
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 3: Review & Confirm -->
+            <section 
+                id="step3" 
+                class="form-step" 
+                role="tabpanel"
+                aria-labelledby="step3-title"
+                aria-hidden="true"
+            >
+                <h3 id="step3-title">Review Your Information</h3>
+                
+                <div class="review-section">
+                    <h4>Account Details</h4>
+                    <dl class="review-list">
+                        <dt>Email:</dt>
+                        <dd id="review-email">-</dd>
+                        <dt>Password:</dt>
+                        <dd id="review-password">••••••••</dd>
+                    </dl>
+                </div>
+
+                <div class="review-section">
+                    <h4>Profile Details</h4>
+                    <dl class="review-list">
+                        <dt>Name:</dt>
+                        <dd id="review-name">-</dd>
+                        <dt>Avatar:</dt>
+                        <dd id="review-avatar">No avatar uploaded</dd>
+                    </dl>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="backToStep2" class="btn btn-secondary">
+                        <span aria-hidden="true">←</span>
+                        Back
+                    </button>
+                    <button type="submit" id="submitForm" class="btn btn-primary btn-submit">
+                        Create Account
+                    </button>
+                </div>
+            </section>
+        </form>
+
+        <!-- Success Message (hidden by default) -->
+        <div id="successMessage" class="success-message" role="alert" aria-live="polite" aria-hidden="true">
+            <h2>Account Created Successfully!</h2>
+            <p>Welcome! Your account has been created.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
